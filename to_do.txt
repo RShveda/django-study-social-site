@@ -1,0 +1,8 @@
+- Create project with multiple apps: Accounts, Posts, Groups
+- Create Signup Form (using UserCreationForm) and customize fields labels
+- connect django-bootstrap to make forms looks nicer (bootstrap_form)
+- inject part of html into a page (they will be store in files with format: _file.html) via "include" tag
+- pip install misaka (for embeded urls)
+- use slugify in models
+- posts Meta: ordering (by newest), unique_together constraint (message, user) - not sure why this needed?
+- use tabularinline to show items in admin panel
