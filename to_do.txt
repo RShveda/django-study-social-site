@@ -6,3 +6,6 @@
 - use slugify in models
 - posts Meta: ordering (by newest), unique_together constraint (message, user) - not sure why this needed?
 - use tabularinline to show items in admin panel
+- django-braces allows using extra mixins for CBVs
+- use messages to notify user (import from django.contrib)
+- use codepan for cool effects
