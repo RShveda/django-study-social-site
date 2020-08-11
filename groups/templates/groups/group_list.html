@@ -1,0 +1,9 @@
+{% extends "groups_base.html" %}
+
+{% block groups_body %}
+<h1>Group list page</h1>
+{% for group in group_list %}
+  <p><a href="{% url "groups:group_detail" group.slug %}">{{group.name}}</a></p>
+{% endfor %}
+
+{% endblock groups_body %}

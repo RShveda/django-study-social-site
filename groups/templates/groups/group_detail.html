@@ -1,0 +1,9 @@
+{% extends "groups_base.html" %}
+
+{% block groups_body %}
+<h1>Welcome to a group page</h1>
+<p>Group name is {{object.name}}</p>
+
+<a href="{% url "groups:group_edit" object.slug %}">Edit</a>
+<a href="{% url "groups:group_delete" object.slug %}">Delete</a>
+{% endblock groups_body %}
