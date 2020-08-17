@@ -1,0 +1,10 @@
+{% extends "posts_base.html" %}
+
+{% block posts_body %}
+  <p>Post create/edit form</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+  </form>
+{% endblock posts_body %}

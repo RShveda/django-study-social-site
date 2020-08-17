@@ -21,9 +21,9 @@ app_name = "groups"
 
 urlpatterns = [
     path('', GroupListView.as_view(), name='group_list'),
-    path('mygroups', MyGroupListView.as_view(), name='my_group_list'),
+    path('mygroups/', MyGroupListView.as_view(), name='my_group_list'),
     path('<slug:slug>/', GroupDetailView.as_view(), name='group_detail'),
-    path('<slug:slug>/delete', GroupDeleteView.as_view(), name='group_delete'),
-    path('new', GroupCreateView.as_view(), name='group_create'),
-    path('<slug:slug>/edit', GroupUpdateView.as_view(), name='group_edit'),
+    path('<slug:slug>/delete/', GroupDeleteView.as_view(), name='group_delete'),
+    path('new/', GroupCreateView.as_view(), name='group_create'),
+    path('<slug:slug>/edit/', GroupUpdateView.as_view(), name='group_edit'),
 ]

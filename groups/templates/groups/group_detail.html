@@ -3,6 +3,8 @@
 {% block groups_body %}
 <h1>Welcome to a group page</h1>
 <p>Group name is {{object.name}}</p>
+<h2><a href="{% url "posts:post_create" group=object.slug %}">Add new post</a></h2>
+
 
 <a href="{% url "groups:group_edit" object.slug %}">Edit</a>
 <a href="{% url "groups:group_delete" object.slug %}">Delete</a>
