@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import DetailView, ListView
 from .models import Group
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 # Create your views here.
 
 class GroupListView(ListView):
@@ -30,5 +31,9 @@ class GroupDetailView(DetailView):
     model = Group
 
 class MyGroupListView(ListView):
-    model = Group
     template_name = "my_group_list.html"
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Group.objects.filter(members = self.request.user)
+        else:
+            return None

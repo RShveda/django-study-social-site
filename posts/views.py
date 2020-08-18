@@ -11,6 +11,13 @@ class MyPostListView(ListView):
     def get_queryset(self):
         return Post.objects.filter(author = self.request.user)
 
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['group_list'] = Group.objects.filter(members = self.request.user)
+        return context
+
 
 class PostCreateView(CreateView):
     model = Post

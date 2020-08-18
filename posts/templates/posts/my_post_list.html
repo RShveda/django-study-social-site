@@ -1,11 +1,10 @@
 {% extends "posts_base.html" %}
 
 {% block posts_body %}
-  <p>My posts</p>
+  <h1>My posts</h1>
   {% for post in post_list %}
-  <p>{{post.text}}</p>
-  <p>created: {{post.created_at}}</p>
-  <p>author: {{post.author}}</p>
+  <p>{{post.text}} created: {{post.created_at}} author: {{post.author}}</p>
   {% endfor %}
-
+  <h1>My grous</h1>
+  {{group_list}}
 {% endblock posts_body %}

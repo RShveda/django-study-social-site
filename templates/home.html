@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block body %}
+
   <h1>This is home page!</h1>
-  <a href="{% url "accounts:login" %}">Login</a>
-  <a href="{% url "accounts:signup" %}">Signup</a>
-  <a href="{% url "accounts:logout" %}">Logout</a>
+  {% for group in group_list %}
+  <li>{{group}}</li>
+  {% endfor %}
 
 {% endblock body %}
