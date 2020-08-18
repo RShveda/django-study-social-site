@@ -29,7 +29,6 @@ class PostCreateView(CreateView):
 class PostUpdateView(UpdateView):
     model = Post
     fields = ["text"]
-    success_url = "/"
 
     def get_success_url(self):
         group_slug = self.object.group.slug
