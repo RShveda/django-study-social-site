@@ -1,9 +1,9 @@
-{% extends "groups_base.html" %}
+{% extends "common_base.html" %}
 
-{% block groups_body %}
+{% block base_top %}
 <h1>My own groups</h1>
 {% for group in group_list %}
   <p>{{group}}</p>
 {% endfor %}
 
-{% endblock groups_body %}
+{% endblock base_top %}

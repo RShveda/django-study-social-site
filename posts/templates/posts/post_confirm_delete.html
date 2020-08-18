@@ -1,10 +1,10 @@
-{% extends "posts_base.html" %}
+{% extends "common_base.html" %}
 
-{% block posts_body %}
+{% block base_top %}
   <p>Delete post page</p>
   <form method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     <input type="submit" value="Confirm">
   </form>
 
-{% endblock posts_body %}
+{% endblock base_top %}

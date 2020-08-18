@@ -1,10 +1,10 @@
-{% extends "posts_base.html" %}
+{% extends "common_base.html" %}
 
-{% block posts_body %}
+{% block base_top %}
   <h1>My posts</h1>
   {% for post in post_list %}
   <p>{{post.text}} created: {{post.created_at}} author: {{post.author}}</p>
   {% endfor %}
   <h1>My grous</h1>
   {{group_list}}
-{% endblock posts_body %}
+{% endblock base_top %}

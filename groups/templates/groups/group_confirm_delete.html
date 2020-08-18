@@ -1,6 +1,6 @@
-{% extends "groups_base.html" %}
+{% extends "common_base.html" %}
 
-{% block groups_body %}
+{% block base_top %}
 <h1>Delete page</h1>
 <form method="post">
     {% csrf_token %}
@@ -8,4 +8,4 @@
     <input type="submit" value="Delete">
 </form>
 
-{% endblock groups_body %}
+{% endblock base_top %}

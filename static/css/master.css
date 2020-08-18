@@ -7,3 +7,21 @@ p{
   font-family: 'Cairo', sans-serif;
   font-weight: 600;
 }
+
+.areas{
+  border-radius: 20px;
+  border: 10px solid white;
+  margin-top: 10px;
+}
+
+#top-area{
+  background-color: #AED9E0;
+}
+
+#bottom-area{
+  background-color: #AED9E0;
+}
+
+#right-area{
+  background-color: #AED9E0;
+}

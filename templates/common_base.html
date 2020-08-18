@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="container areas" id="top-area">
+          {% block base_top %}
+          {% endblock base_top %}
+        </div>
+        <div class="container areas" id="bottom-area">
+          {% block base_bottom %}
+          {% endblock base_bottom %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="container areas" id="right-area">
+          {% block base_right %}
+          {% endblock base_right %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}
