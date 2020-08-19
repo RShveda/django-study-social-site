@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import DetailView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Group
 from django.urls import reverse_lazy
 from django.http import HttpResponse
@@ -9,7 +10,7 @@ from django.http import HttpResponse
 class GroupListView(ListView):
     model = Group
 
-class GroupCreateView(CreateView):
+class GroupCreateView(LoginRequiredMixin, CreateView):
     model = Group
     fields = ["name", "description"]
 
@@ -19,11 +20,11 @@ class GroupCreateView(CreateView):
         form.instance.members.add(self.request.user)
         return super().form_valid(form)
 
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group
     fields = ["name", "description"]
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(LoginRequiredMixin, DeleteView):
     model = Group
     success_url = reverse_lazy('groups:group_list')
 
