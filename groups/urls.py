@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.urls import path, include
 from .views import (GroupCreateView, GroupDetailView, GroupDeleteView,
-                        GroupUpdateView, GroupListView, MyGroupListView)
+                        GroupUpdateView, GroupListView, MyGroupListView,
+                        GroupJoinView)
 
 app_name = "groups"
 
@@ -26,4 +27,5 @@ urlpatterns = [
     path('<slug:slug>/delete/', GroupDeleteView.as_view(), name='group_delete'),
     path('new/', GroupCreateView.as_view(), name='group_create'),
     path('<slug:slug>/edit/', GroupUpdateView.as_view(), name='group_edit'),
+    path('<slug:slug>/join/', GroupJoinView.as_view(), name='group_join'),
 ]

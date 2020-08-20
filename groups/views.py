@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views import View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Group
+from .models import Group, GroupMembership
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 # Create your views here.
@@ -38,3 +39,11 @@ class MyGroupListView(ListView):
             return Group.objects.filter(members = self.request.user)
         else:
             return None
+
+class GroupJoinView(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        group = Group.objects.get(slug = kwargs["slug"])
+        person = self.request.user
+        membership = GroupMembership.objects.create(group=group, person=person)
+        membership.save()
+        return redirect("groups:group_detail", slug=group.slug)
