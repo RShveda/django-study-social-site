@@ -1,11 +1,32 @@
 {% extends "common_base.html" %}
 
 {% block base_top %}
-<h1>Welcome to a group page</h1>
-<p>Group name is {{object.name}}</p>
-<h2><a href="{% url "posts:post_create" group=object.slug %}">Add new post</a></h2>
-
-
-<a href="{% url "groups:group_edit" object.slug %}">Edit</a>
-<a href="{% url "groups:group_delete" object.slug %}">Delete</a>
+<h1>{{object.name}}</h1>
+<p>{{object.description}}</p>
 {% endblock base_top %}
+
+{% block base_bottom %}
+<h2><a href="{% url "posts:post_create" group=object.slug %}">Add new post</a></h2>
+{% for post in object.group_posts.all %}
+  {% include "posts/_post.html" with post=post %}
+{% endfor %}
+{% endblock base_bottom %}
+
+{% block base_right %}
+<div class="container">
+  <p>Welcome to {{object.name}} page.</p>
+    {% if user.is_authenticated %}
+
+      {% if user in object.members.all %}
+        <p>{{user}} you are member of this group!</p>
+      {% else %}
+        <a href="#">Join Group</a>
+      {% endif %}
+
+      <a href="{% url "groups:group_edit" object.slug %}">Edit</a>
+      <a href="{% url "groups:group_delete" object.slug %}">Delete</a>
+
+    {% endif %}
+
+</div>
+{% endblock base_right %}
