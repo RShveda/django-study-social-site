@@ -20,6 +20,7 @@
 
       {% if user in object.members.all %}
         <p>{{user}} you are member of this group!</p>
+        <a href="{% url "groups:group_leave" object.slug %}">Leave Group</a>
       {% else %}
         <a href="{% url "groups:group_join" object.slug %}">Join Group</a>
       {% endif %}

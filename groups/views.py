@@ -51,3 +51,15 @@ class GroupJoinView(LoginRequiredMixin, View):
         except:
             messages.warning(request, 'You cannot join this group because you are already its member')
         return redirect("groups:group_detail", slug=group.slug)
+
+class GroupLeaveView(LoginRequiredMixin, View):
+    def get(self, request, **kwargs):
+        group = Group.objects.get(slug = kwargs["slug"])
+        person = self.request.user
+        try:
+            membership = GroupMembership.objects.get(group=group, person=person)
+            membership.delete()
+            messages.info(request, 'Group abandoned successfully')
+        except:
+            messages.warning(request, 'Leaving group failed')
+        return redirect("groups:group_detail", slug=group.slug)
