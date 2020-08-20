@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Group, GroupMembership
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from django.contrib import messages
 # Create your views here.
 
 class GroupListView(ListView):
@@ -44,6 +45,9 @@ class GroupJoinView(LoginRequiredMixin, View):
     def get(self, request, **kwargs):
         group = Group.objects.get(slug = kwargs["slug"])
         person = self.request.user
-        membership = GroupMembership.objects.create(group=group, person=person)
-        membership.save()
+        try:
+            membership = GroupMembership.objects.create(group=group, person=person)
+            membership.save()
+        except:
+            messages.warning(request, 'You cannot join this group because you are already its member')
         return redirect("groups:group_detail", slug=group.slug)

@@ -15,6 +15,7 @@
 {% block base_right %}
 <div class="container">
   <p>Welcome to {{object.name}} page.</p>
+
     {% if user.is_authenticated %}
 
       {% if user in object.members.all %}
@@ -27,6 +28,5 @@
       <a href="{% url "groups:group_delete" object.slug %}">Delete</a>
 
     {% endif %}
-
 </div>
 {% endblock base_right %}
