@@ -6,7 +6,14 @@
 {% endblock base_top %}
 
 {% block base_bottom %}
-<h2><a href="{% url "posts:post_create" group=object.slug %}">Add new post</a></h2>
+
+<form class="" action="{% url "posts:post_create" group=object.slug %}" method="post">
+  {% csrf_token %}
+  <label for="text">New post:</label>
+  <textarea name="text" placeholder="Enter your post here" rows="3" cols="40" required></textarea>
+  <input type="submit" name="" value="Post">
+</form>
+
 {% for post in object.group_posts.all %}
   {% include "posts/_post.html" with post=post %}
 {% endfor %}
