@@ -5,21 +5,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post
 from groups.models import Group
 from django.urls import reverse_lazy, reverse
+from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your views here.
-class MyPostListView(LoginRequiredMixin, ListView):
-    template_name = "my_post_list.html"
-    def get_queryset(self):
-        return Post.objects.filter(author = self.request.user)
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all
-        context['group_list'] = Group.objects.filter(members = self.request.user)
-        return context
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["text"]

@@ -37,7 +37,7 @@
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url "posts:my_post_list" %}">My Posts</a>
+              <a class="nav-link" href="{% url "accounts:profile" %}">My Posts</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url "accounts:logout" %}">Logout</a>

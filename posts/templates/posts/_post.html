@@ -1,1 +1,5 @@
-<p>{{post}}</p>
+
+<div class="">
+  <span><h3>{{post}}</h3></span>
+  <span>created by: <a href="{% url "accounts:profile" post.author %}">{{post.author}}</a></span>
+</div>

@@ -3,7 +3,7 @@
 {% block base_top %}
 <div class="container">
   {% if user.is_authenticated %}
-    <h1 class="display-4">Hello, <a href="#">{{user}}</a></h1>
+    <h1 class="display-4">Hello, <a href="{% url "accounts:profile" %}">{{user}}</a></h1>
     <p class="lead">Nice to see you here again.</p>
     <hr class="my-4">
     <p>Pick a group to start chatting:</p>
