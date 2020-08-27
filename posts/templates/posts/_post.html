@@ -2,4 +2,12 @@
 <div class="">
   <span><h3>{{post}}</h3></span>
   <span>created by: <a href="{% url "accounts:profile" post.author %}">{{post.author}}</a></span>
+  {% if post.author.username == user.username %}
+    <span><a href="{% url "posts:post_edit" post.id %}">Edit Post</a></span>
+    {% if my_profile %}
+      <span><a href="{% url "posts:post_delete" post.id %}?next={% url "accounts:profile" %}">Delete</a></span>
+    {% else %}
+      <span><a href="{% url "posts:post_delete" post.id %}">Delete</a></span>
+    {% endif %}
+  {% endif %}
 </div>

@@ -1,10 +1,23 @@
 {% extends "common_base.html" %}
 
 {% block base_top %}
+  {% if view.kwargs.username %}
+    <h1>This is {{view.kwargs.username}}'s profile page</h1>
+  {% else %}
+    <h1>This is your profile page</h1>
+  {% endif %}
+{% endblock base_top %}
+
+{% block base_bottom %}
   <h1>My posts</h1>
   {% for post in post_list %}
-  <p>{{post.text}} created: {{post.created_at}} author: {{post.author}}</p>
+    {% include "posts/_post.html" with post=post my_profile="True" %}
   {% endfor %}
-  <h1>My grous</h1>
-  {{group_list}}
-{% endblock base_top %}
+{% endblock base_bottom %}
+
+{% block base_right %}
+  <h1>My groups</h1>
+  {% for group in group_list %}
+    {% include "_group.html" with group=group %}
+  {% endfor %}
+{% endblock base_right%}

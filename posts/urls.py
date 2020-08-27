@@ -20,6 +20,6 @@ app_name = "posts"
 
 urlpatterns = [
     path('<slug:group>/new/', PostCreateView.as_view(), name='post_create'),
-    path('<pk>/delete/', PostDeleteView.as_view(), name='post_edit'),
+    path('<pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('<pk>/edit/', PostUpdateView.as_view(), name='post_edit'),
 ]
