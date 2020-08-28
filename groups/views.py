@@ -26,9 +26,25 @@ class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group
     fields = ["name", "description"]
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.request.user == self.object.owner:
+            return super().post(request, *args, **kwargs)
+        else:
+            messages.warning(request, 'You cannot edit someone elses group')
+            return redirect(self.request.path)
+
 class GroupDeleteView(LoginRequiredMixin, DeleteView):
     model = Group
     success_url = reverse_lazy('groups:group_list')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.request.user == self.object.owner:
+            return super().post(request, *args, **kwargs)
+        else:
+            messages.warning(request, 'You cannot delete someone elses group')
+            return redirect(self.request.path)
 
 class GroupDetailView(DetailView):
     model = Group

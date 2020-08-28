@@ -32,8 +32,11 @@
         <a href="{% url "groups:group_join" object.slug %}">Join Group</a>
       {% endif %}
 
-      <a href="{% url "groups:group_edit" object.slug %}">Edit</a>
-      <a href="{% url "groups:group_delete" object.slug %}">Delete</a>
+      {% if user == object.owner %}
+        <p>You are owner of this group</p>
+        <a href="{% url "groups:group_edit" object.slug %}">Edit</a>
+        <a href="{% url "groups:group_delete" object.slug %}">Delete</a>
+      {% endif %}
 
     {% endif %}
 </div>
