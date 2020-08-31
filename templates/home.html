@@ -16,20 +16,16 @@
     <p>Signup and start chatting.</p>
     <a class="btn btn-primary btn" href="{% url "accounts:signup" %}" role="button">Signup</a>
   {% endif %}
-
 </div>
 {% endblock base_top %}
 
-{% block base_bottom %}
-{% endblock base_bottom %}
+{% block base_bottom %}{% endblock base_bottom %}
 
-{% block base_right %}
-  {% if user.is_authenticated %}
+{% block base_right %}{% if user.is_authenticated %}
   <h2>List of your groups</h2>
     <ul>
       {% for group in group_list %}
       <li><a href="{% url "groups:group_detail" group.slug %}">{{group}}</a></li>
       {% endfor %}
     </ul>
-  {% endif %}
-{% endblock base_right %}
+  {% endif %}{% endblock base_right %}

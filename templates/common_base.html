@@ -13,20 +13,20 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <div class="container areas" id="top-area">
-          {% block base_top %}
-          {% endblock base_top %}
-        </div>
-        <div class="container areas" id="bottom-area">
-          {% block base_bottom %}
-          {% endblock base_bottom %}
-        </div>
+
+        <!-- TOP BLOCK -->
+        <div class="container areas" id="top-area">{% block base_top %}
+          {% endblock base_top %}</div>
+
+        <!-- BOTTOM BLOCK -->
+        <div class="container areas" id="bottom-area">{% block base_bottom %}
+          {% endblock base_bottom %}</div>
       </div>
       <div class="col-md-5">
-        <div class="container areas" id="right-area">
-          {% block base_right %}
-          {% endblock base_right %}
-        </div>
+        
+        <!-- RIGHT BLOCK -->
+        <div class="container areas" id="right-area">{% block base_right %}
+          {% endblock base_right %}</div>
       </div>
     </div>
   </div>
