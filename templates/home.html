@@ -23,9 +23,7 @@
 
 {% block base_right %}{% if user.is_authenticated %}
   <h2>List of your groups</h2>
-    <ul>
       {% for group in group_list %}
-      <li><a href="{% url "groups:group_detail" group.slug %}">{{group}}</a></li>
+      {% include "_group.html" with group=group %}
       {% endfor %}
-    </ul>
   {% endif %}{% endblock base_right %}

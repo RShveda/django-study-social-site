@@ -1,5 +1,6 @@
 body{
   background-color: #8D99AE;
+  font-family: 'Cairo', sans-serif;
 }
 
 .nav-custom,
@@ -22,19 +23,19 @@ body{
 }
 
 
-h1{
+h1, h2{
   color: #d90429;
   font-family: 'Bangers', cursive;
 }
 
-.btn{
+h5, p{
+  font-family: none;
+}
+
+.btn-font{
   font-family: 'Bangers', cursive;
 }
 
-p{
-  font-family: 'Cairo', sans-serif;
-  font-weight: 600;
-}
 
 .areas{
   border-radius: 16px;
@@ -53,6 +54,10 @@ p{
   background-color: inherit;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.post-item{
+  padding-bottom: 5px;
 }
 
 .post-form{
