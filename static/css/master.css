@@ -36,6 +36,9 @@ h5, p{
   font-family: 'Bangers', cursive;
 }
 
+.font-weight-lighter{
+  font-size: 0.9em;
+}
 
 .areas{
   border-radius: 16px;
@@ -54,6 +57,7 @@ h5, p{
   background-color: inherit;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-color: #8d99ae;
 }
 
 .post-item{

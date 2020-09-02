@@ -5,13 +5,14 @@
   <p>Click on one of the groups from the list on the right to see its thread.</p>
   {% if user.is_authenticated %}
     <p>Click button bellow to start a new group:</p>
-    <a class="btn btn-primary btn" href="{% url "groups:group_create" %}" role="button">Signup</a>
+    <a class="btn btn-primary" href="{% url "groups:group_create" %}" role="button">New Group</a>
   {% endif %}
 {% endblock base_top %}
 
 {% block base_bottom %}{% endblock base_bottom %}
 
 {% block base_right %}
+  <h1>All Groups</h1>
   {% for group in group_list %}
 
   {% include "_group.html" with group=group %}

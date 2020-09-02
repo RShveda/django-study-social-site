@@ -4,14 +4,13 @@
 <div class="container">
   {% if user.is_authenticated %}
     <h1 class="display-4">Hello, <a href="{% url "accounts:profile" %}">{{user}}</a></h1>
-    <p class="lead">Nice to see you here again.</p>
+    <p class="lead">Nice to see you here again!</p>
     <hr class="my-4">
-    <p>Pick a group to start chatting:</p>
+    <p>Pick a group to start chatting:  </p>
     <a class="btn btn-primary btn" href="{% url "groups:group_list" %}" role="button">All Groups</a>
   {% else %}
     <h1 class="display-4">Welcome!</h1>
     <p class="lead">This is the best flood forum on the web.</p>
-    <p class=""></p>
     <hr class="my-4">
     <p>Signup and start chatting.</p>
     <a class="btn btn-primary btn" href="{% url "accounts:signup" %}" role="button">Signup</a>
