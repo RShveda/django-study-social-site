@@ -1,15 +1,6 @@
 {% extends "base.html" %}
 
 {% block body %}
-  <!-- Messages -->
-  {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
   <div class="container">
     <div class="row">
       <div class="col-md-7">
@@ -23,7 +14,7 @@
           {% endblock base_bottom %}</div>
       </div>
       <div class="col-md-5">
-        
+
         <!-- RIGHT BLOCK -->
         <div class="container areas" id="right-area">{% block base_right %}
           {% endblock base_right %}</div>

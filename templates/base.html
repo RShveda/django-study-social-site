@@ -6,6 +6,8 @@
     <title>Flood Forum</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
@@ -14,6 +16,8 @@
 
   </head>
   <body>
+
+      {% load bootstrap4 %}
 
       <!-- NavBar -->
       <nav class="navbar nav-custom navbar-expand-lg sticky-top navbar-light">
@@ -44,7 +48,7 @@
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url "accounts:login" %}">Loging</a>
+              <a class="nav-link" href="{% url "accounts:login" %}">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url "accounts:signup" %}">Sign Up</a>
@@ -54,7 +58,7 @@
         </div>
       </nav>
 
-
+      {% bootstrap_messages %}
       {% block body %}
 
       {% endblock body %}

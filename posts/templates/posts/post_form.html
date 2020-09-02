@@ -1,11 +1,13 @@
 {% extends "common_base.html" %}
-
+{% load bootstrap4 %}
 {% block base_top %}
   <p>Post create/edit form</p>
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
+    {% bootstrap_form form %}
+    {% buttons %}
+      <input type="submit" value="Update">
+    {% endbuttons %}
   </form>
 {% endblock base_top %}
 

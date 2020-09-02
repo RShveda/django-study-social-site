@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-
 {% block body %}
-  <p>accounts base.html was rendered</p>
-  {% block accounts_body %}
+<div class="container">
+  <div class="areas col-md-7" id="top-area">{% block accounts_body %}{% endblock accounts_body %}</div>
 
-  {% endblock accounts_body %}
+</div>
+
 {% endblock body %}

@@ -9,9 +9,23 @@
 
 <form class="" action="{% url "posts:post_create" group=object.slug %}" method="post">
   {% csrf_token %}
-  <label for="text">New post:</label>
-  <textarea name="text" placeholder="Enter your post here" rows="3" cols="40" required></textarea>
-  <input type="submit" name="" value="Post">
+
+  <div class="form-group">
+    <label for="text">Add your post:</label>
+    <div class="post-form">
+      <textarea class="form-control post-textarea" name="text" placeholder="Enter your post here" rows="2" required></textarea>
+      <div class="container">
+        <div class="container post-form-toolbar d-flex justify-content-end">
+          <button class="btn btn-link" type="submit" name="button">
+            <svg width="1.2em" height="1.2em" viewBox="-4 1 16 16" class="bi bi-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+            </svg>
+            Post
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 
 {% for post in object.group_posts.all %}

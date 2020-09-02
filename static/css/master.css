@@ -27,6 +27,10 @@ h1{
   font-family: 'Bangers', cursive;
 }
 
+.btn{
+  font-family: 'Bangers', cursive;
+}
+
 p{
   font-family: 'Cairo', sans-serif;
   font-weight: 600;
@@ -51,6 +55,24 @@ p{
   margin-bottom: 10px;
 }
 
+.post-form{
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.post-textarea{
+  border:none;
+  /* outline: 0px solid transparent; */
+  /* border-top: none;
+  border-right: none;
+  border-left: none; */
+  /* border-bottom: 1px solid #ced4da; */
+}
+
+.post-form-toolbar{
+  border-top: 1px solid #ced4da;
+}
 /* #top-area{
   background-color: #EDF2F4;
 }
