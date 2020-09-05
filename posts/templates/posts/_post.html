@@ -10,9 +10,10 @@
             {% if post.author.username == user.username %}
               You
             {% else %}
-              {{post.author}}
+              @{{post.author}}
             {% endif %}
         </a></span>
+        <span class="font-weight-lighter"> Karma: {{post.author.userprofileinfo.karma}}</span>
         <span class="font-weight-lighter"> on {{post.created_at}}</span>
       </div>
 
@@ -41,6 +42,24 @@
             </a>
           </span>
         {% endif %}
+      </div>
+
+      <div class="voting">
+        {% if user in post.voters.all %}
+        <form class="" action="{% url "posts:post_remove_vote" post.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" name="vote">Remove</button>
+        </form>
+        {% else %}
+        <form class="" action="{% url "posts:post_vote" post.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" name="vote" value=1>+1</button>
+          <button type="submit" name="vote" value=-1>-1</button>
+        </form>
+        {% endif %}
+
+
+
       </div>
 
     </div>

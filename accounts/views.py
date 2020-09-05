@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from groups.models import Group
 from posts.models import Post
+from accounts.models import UserProfileInfo
 
 # Create your views here.
 
@@ -15,6 +16,11 @@ class UserCreateView(CreateView):
     form_class = UserCreationForm
     template_name = "signup.html"
     success_url = "/"
+
+    def form_valid(self, form):
+        user = form.save()
+        profile = UserProfileInfo.objects.create(user=user, karma=0)
+        return super().form_valid(form)
 
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = "profile.html"

@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from .views import (PostCreateView, PostDeleteView, PostUpdateView)
+from .views import (PostCreateView, PostDeleteView, PostUpdateView, PostVoteView,
+                    PostRemoveVoteView)
 
 app_name = "posts"
 
@@ -22,4 +23,6 @@ urlpatterns = [
     path('<slug:group>/new/', PostCreateView.as_view(), name='post_create'),
     path('<pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('<pk>/edit/', PostUpdateView.as_view(), name='post_edit'),
+    path('<pk>/vote/', PostVoteView.as_view(), name='post_vote'),
+    path('<pk>/remove_vote/', PostRemoveVoteView.as_view(), name='post_remove_vote'),
 ]
