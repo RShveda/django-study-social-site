@@ -81,12 +81,20 @@ class PostDeleteViewTests(BaseTestSetup):
 
 class PostVoteViewTests(BaseTestSetup):
     def test_vote_view_allows_to_vote(self):
+        """
+        New record created in PostVotes table if user did note vote for that post
+        in the past.
+        """
         self.client.login(username = "John", password = "newpass1234")
         votes_len = len(PostVotes.objects.all())
         response = self.client.post('/posts/2/vote/', {"vote":"-1"})
         self.assertEqual(len(PostVotes.objects.all()), votes_len + 1)
 
     def test_vote_view_dont_allow_to_vote_multiple_times(self):
+        """
+        If user voted before for some post, the view will not add same record
+        to DB.
+        """
         self.client.login(username = "John", password = "newpass1234")
         votes_len = len(PostVotes.objects.all())
         try:
@@ -98,18 +106,27 @@ class PostVoteViewTests(BaseTestSetup):
         self.assertEqual(len(PostVotes.objects.all()), votes_len)
 
     def test_vote_view_increment_up_vote_counter(self):
+        """
+        up_vote counter is incremented for the post that is voted on.
+        """
         self.client.login(username = "John", password = "newpass1234")
         up_votes = Post.objects.get(id=2).up_votes
         response = self.client.post('/posts/2/vote/', {"vote":"1"})
         self.assertEqual(Post.objects.get(id=2).up_votes, up_votes + 1)
 
     def test_vote_view_increment_down_vote_counter(self):
+        """
+        down_vote counter is incremented for the post that is voted on.
+        """
         self.client.login(username = "John", password = "newpass1234")
         down_votes = Post.objects.get(id=2).down_votes
         response = self.client.post('/posts/2/vote/', {"vote":"-1"})
         self.assertEqual(Post.objects.get(id=2).down_votes, down_votes + 1)
 
-    def test_vote_view_increment_author_karma(self):
+    def test_vote_view_update_author_karma(self):
+        """
+        Post author karma is updated depending on the vote.
+        """
         self.client.login(username = "John", password = "newpass1234")
         user = User.objects.get(username="John")
         karma = UserProfileInfo.objects.get(user=user).karma
@@ -118,12 +135,19 @@ class PostVoteViewTests(BaseTestSetup):
 
 class PostRemoveVoteView(BaseTestSetup):
     def test_remove_vote_view_allows_to_remove_vote(self):
+        """
+        Vote is removed from PostVotes tble.
+        """
         self.client.login(username = "John", password = "newpass1234")
         votes_len = len(PostVotes.objects.all())
         response = self.client.post('/posts/1/remove_vote/')
         self.assertEqual(len(PostVotes.objects.all()), votes_len-1)
 
     def test_remove_vote_view_handles_none_existing_votes(self):
+        """
+        Cannot remove vote that does not exist. Instead of that app shows a message
+        to user.
+        """
         self.client.login(username = "John", password = "newpass1234")
         votes_len = len(PostVotes.objects.all())
         response = self.client.post('/posts/2/remove_vote/')
@@ -131,13 +155,19 @@ class PostRemoveVoteView(BaseTestSetup):
         messages = list(redirect_response.context['messages'])
         self.assertEqual('something went wrong', str(messages[0]))
 
-    def test_remove_view_update_user_karma(self):
+    def test_remove_view_update_votes_counters(self):
+        """
+        up_votes (or down_votes) counter is updated if vote is removed.
+        """
         self.client.login(username = "John", password = "newpass1234")
         up_votes = Post.objects.get(id=1).up_votes
         response = self.client.post('/posts/1/remove_vote/')
         self.assertEqual(Post.objects.get(id=1).up_votes, up_votes-1)
 
-    def test_remove_view_update_votes_counter(self):
+    def test_remove_view_update_author_karma(self):
+        """
+        Post author karma is updated after vote is removed.
+        """
         self.client.login(username = "John", password = "newpass1234")
         user = User.objects.get(username="John")
         karma = UserProfileInfo.objects.get(user=user).karma
