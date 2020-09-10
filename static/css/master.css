@@ -72,15 +72,14 @@ h5, p{
 
 .post-textarea{
   border:none;
-  /* outline: 0px solid transparent; */
-  /* border-top: none;
-  border-right: none;
-  border-left: none; */
-  /* border-bottom: 1px solid #ced4da; */
 }
 
 .post-form-toolbar{
   border-top: 1px solid #ced4da;
+}
+
+.voting-section{
+  /* padding: 10px; */
 }
 /* #top-area{
   background-color: #EDF2F4;

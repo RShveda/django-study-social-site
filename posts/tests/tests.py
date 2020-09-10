@@ -99,8 +99,7 @@ class PostVoteViewTests(BaseTestSetup):
         votes_len = len(PostVotes.objects.all())
         try:
             with transaction.atomic():
-                response1 = self.client.post('/posts/1/vote/', {"vote":"1"})
-                print(response1)
+                response1 = self.client.post('/posts/1/vote/', {"vote":"1"})                
         except:
             pass
         self.assertEqual(len(PostVotes.objects.all()), votes_len)

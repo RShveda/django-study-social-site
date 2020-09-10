@@ -66,13 +66,13 @@ class PostVoteView(LoginRequiredMixin, View):
         vote = int(self.request.POST["vote"])
         user_profile = UserProfileInfo.objects.get(user=post.author)
         try:
-            post_vote = PostVotes.objects.create(post=post, voter=voter, vote=vote)
             post.add_vote(vote)
             post.save()
+            post_vote = PostVotes.objects.create(post=post, voter=voter, vote=vote)
             user_profile.update_karma(vote)
             user_profile.save()
         except:
-            messages.warning(request, 'You cannot vote again')
+            messages.warning(request, 'Something went wrong')
         return redirect("groups:group_detail", slug=post.group.slug)
 
 class PostRemoveVoteView(LoginRequiredMixin, View):
