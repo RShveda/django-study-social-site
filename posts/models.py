@@ -71,5 +71,19 @@ class PostVotes(models.Model):
     class Meta:
         unique_together = ("post", "voter")
 
+    def save(self, *args, **kwargs):
+        self.post.add_vote(self.vote)
+        self.post.save()
+        self.post.author.userprofileinfo.update_karma(self.vote)
+        self.post.author.userprofileinfo.save()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.post.remove_vote(self.vote)
+        self.post.save()
+        self.post.author.userprofileinfo.update_karma(0-(self.vote))
+        self.post.author.userprofileinfo.save()
+        super().delete(*args, **kwargs)
+
     def __str__(self):
         return self.voter.username + " has voted " + str(self.vote) + " for " + self.post.text

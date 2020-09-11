@@ -64,13 +64,8 @@ class PostVoteView(LoginRequiredMixin, View):
         post = Post.objects.get(pk = kwargs["pk"])
         voter = self.request.user
         vote = int(self.request.POST["vote"])
-        user_profile = UserProfileInfo.objects.get(user=post.author)
         try:
-            post.add_vote(vote)
-            post.save()
             post_vote = PostVotes.objects.create(post=post, voter=voter, vote=vote)
-            user_profile.update_karma(vote)
-            user_profile.save()
         except:
             messages.warning(request, 'Something went wrong')
         return redirect("groups:group_detail", slug=post.group.slug)
@@ -85,14 +80,8 @@ class PostRemoveVoteView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
         post = Post.objects.get(pk = kwargs["pk"])
         voter = self.request.user
-        user_profile = UserProfileInfo.objects.get(user=post.author)
         try:
             post_vote = PostVotes.objects.get(post=post, voter=voter)
-            vote = post_vote.vote
-            post.remove_vote(vote)
-            post.save()
-            user_profile.update_karma(0-(vote))
-            user_profile.save()
             post_vote.delete()
             messages.info(request, 'Vote removed successfully')
         except:
