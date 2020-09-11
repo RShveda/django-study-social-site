@@ -3,7 +3,8 @@ from django.test import Client
 from django.contrib.auth.models import User
 from django.urls import reverse
 from groups.models import Group, GroupMembership
-from posts.models import Post
+from posts.models import Post, PostVotes
+from accounts.models import UserProfileInfo
 # Create your tests here.
 
 class SignupViewTests(TestCase):
@@ -28,18 +29,25 @@ class ProfileViewTests(TestCase):
         client = Client()
         john = User.objects.create_user(username = "John", password = "newpass1234")
         bill = User.objects.create_user(username = "Bill", password = "newpass1234")
+        john_profile = UserProfileInfo.objects.create(user=john)
+        bill_profile = UserProfileInfo.objects.create(user=bill)
         new_group = Group.objects.create(name = "new_group",
                                         description = "some descriprion about the group",
                                         owner = john)
         new_group2 = Group.objects.create(name = "new_group2",
                                         description = "some descriprion about the group",
                                         owner = bill)
+        new_group3 = Group.objects.create(name = "new_group3",
+                                        description = "some descriprion about the group",
+                                        owner = bill)
         GroupMembership.objects.create(group = new_group, person = bill)
         GroupMembership.objects.create(group = new_group2, person = bill)
         GroupMembership.objects.create(group = new_group, person = john)
-        Post.objects.create(group=new_group, author=john, text = "post by john")
-        Post.objects.create(group=new_group, author=john, text = "post by john 2")
-        Post.objects.create(group=new_group, author=bill, text = "post by bill")
+        GroupMembership.objects.create(group = new_group3, person = john)
+        post1 = Post.objects.create(group=new_group, author=john, text = "post by john")
+        post2 = Post.objects.create(group=new_group, author=john, text = "post by john 2")
+        post3 = Post.objects.create(group=new_group, author=bill, text = "post by bill")
+        vote1_post1 = PostVotes.objects.create(post=post1, voter=john, vote=1)
 
     def test_open_profile_unauthorized(self):
         """

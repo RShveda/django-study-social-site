@@ -39,6 +39,8 @@ class ProfileView(LoginRequiredMixin, ListView):
         try:
             post_author = User.objects.get(username = self.kwargs["username"])
             context['group_list'] = Group.objects.filter(members = post_author)
+            context['karma'] = post_author.userprofileinfo.karma
         except:
             context['group_list'] = Group.objects.filter(members = self.request.user)
+            context['karma'] = self.request.user.userprofileinfo.karma
         return context

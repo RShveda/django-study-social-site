@@ -1,0 +1,28 @@
+{% extends "common_base.html" %}
+
+{% block base_top %}
+<div class="container">
+  <h1>Best Authors of Our Forum:</h1>
+  <table class="table">
+    <thead>
+      <th style="width: 10%">Rank</th>
+      <th>Name</th>
+      <th class="d-flex justify-content-center">Karma</th>
+    </thead>
+    <tbody>
+      {% for profile in userprofileinfo_list %}
+      <tr>
+        <td class="d-flex justify-content-center">{{forloop.counter}}</td>
+        <td><a href="{% url "accounts:profile" profile.user %}">{{profile.user.username}}</a></td>
+        <td class="d-flex justify-content-center">{{profile.karma}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+{% endblock base_top %}
+
+{% block base_bottom %}{% endblock base_bottom %}
+
+{% block base_right %}{% endblock base_right %}
