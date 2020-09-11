@@ -1,6 +1,6 @@
-<div class="card group-item" onclick="location.href='{% url "groups:group_detail" group.slug %}'" style="cursor: pointer";>
+<div class="card group-item shadow-sm" onclick="location.href='{% url "groups:group_detail" group.slug %}'" style="cursor: pointer";>
   <div class="card-body">
-    <h5 class="card-title">{{group.name}}</h5>
+    <h5 class="card-title group-card-title">{{group.name}}</h5>
     <p class="card-text">{{group.description|truncatechars:30}}</p>
     <span class="font-weight-lighter">Last activity: {{group.group_posts.all.0.created_at}}</span>
     <span class="font-weight-lighter float-right">Posts:{{group.group_posts.all.count}}</span>

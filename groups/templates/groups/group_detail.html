@@ -6,7 +6,7 @@
 {% endblock base_top %}
 
 {% block base_bottom %}
-<form class="" action="{% url "posts:post_create" group=object.slug %}" method="post">
+<form class="shadow-sm" action="{% url "posts:post_create" group=object.slug %}" method="post">
   {% csrf_token %}
   <div class="form-group">
     <label for="text">Add your post:</label>

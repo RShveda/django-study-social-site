@@ -81,6 +81,13 @@ h5, p{
 .voting-section{
   text-align: center;
 }
+
+.group-card-title{
+  font-weight: bold;
+  color: #ef233c;
+  font-family: 'Cairo', sans-serif;
+
+}
 /* #top-area{
   background-color: #EDF2F4;
 }
