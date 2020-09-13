@@ -3,23 +3,18 @@
 {% block body %}
   <div class="container">
     <div class="row">
-      <div class="col-md-7">
-
-        <!-- TOP BLOCK -->
+      <!-- LEFT BLOCK -->
+      <div class="col-lg-7">
         <div class="container areas shadow" id="top-area">{% block base_top %}
           {% endblock base_top %}</div>
-
-        <!-- BOTTOM BLOCK -->
         <div class="container areas shadow" id="bottom-area">{% block base_bottom %}
           {% endblock base_bottom %}</div>
       </div>
-      <div class="col-md-5">
-
-        <!-- RIGHT BLOCK -->
+      <!-- RIGHT BLOCK -->
+      <div class="col-lg-5">
         <div class="container areas shadow" id="right-area">{% block base_right %}
           {% endblock base_right %}</div>
       </div>
     </div>
   </div>
-
 {% endblock body %}

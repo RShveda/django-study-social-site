@@ -4,30 +4,35 @@
     <div class="row">
 
       <!-- VOTING SECTION -->
-      <div class="voting-section col-sm-1 d-flex justify-content-center align-items-center">
+      <div class="voting-section col-md-1 order-md-1 order-12 d-flex justify-content-center align-items-center">
         <div class="voting">
-
           {% if user in post.voters.all %}
             <form class="" action="{% url "posts:post_remove_vote" post.id %}" method="post">
           {% else %}
             <form class="" action="{% url "posts:post_vote" post.id %}" method="post">
           {% endif %}
+          <div class="row">
 
-            <button type="submit" class="btn btn-light btn-sm {% if post|vote_value:user == 1 %} active {% endif %}" name="vote" value=1 {% if post|vote_value:user == -1 %} disabled {% endif %}>
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-              </svg>
-            </button>
+            <div class="col">
+              <button type="submit" class="btn btn-light btn-sm {% if post|vote_value:user == 1 %} active {% endif %}" name="vote" value=1 {% if post|vote_value:user == -1 %} disabled {% endif %}>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                </svg>
+              </button>
+            </div>
 
-            <div class="">
+            <div class="col d-flex justify-content-center align-items-center">
               {{post.up_votes|subtract:post.down_votes}}
             </div>
 
-            <button type="submit" class="btn btn-light btn-sm {% if post|vote_value:user == -1 %} active {% endif %}" name="vote" value=-1 {% if post|vote_value:user == 1 %} disabled {% endif %}>
-              <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-              </svg>
-            </button>
+            <div class="col">
+              <button type="submit" class="btn btn-light btn-sm {% if post|vote_value:user == -1 %} active {% endif %}" name="vote" value=-1 {% if post|vote_value:user == 1 %} disabled {% endif %}>
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
 
             {% csrf_token %}
           </form>
@@ -35,8 +40,10 @@
       </div>
 
       <!-- CARD BODY -->
-      <div class="card-body col-sm-11">
+      <div class="card-body col-md-11 order-1 order-md-12">
         <h5 class="card-title">{{post}}</h5>
+
+        <!-- LEFT TOOLBAR -->
         <div class="d-inline toolbar-left">
           <span class="font-weight-lighter">{{post.created_at}}</span>
           <span class="font-weight-lighter">posted by</span>
@@ -53,20 +60,17 @@
               </svg>
             {{post.author.userprofileinfo.karma}})
           </span>
-
         </div>
 
-
+        <!-- RIGHT TOOLBAR -->
         <div class="toolbar-right float-right">
           {% if post.author.username == user.username %}
-
             <!-- Edit button -->
             <span><a href="{% url "posts:post_edit" post.id %}" class="card-link">
               <svg width="0.8em" height="0.8em" viewBox="0 1 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
               </svg>
               Edit</a></span>
-
             <!-- Delete button -->
             <span>
               {% if my_profile %}
@@ -74,14 +78,15 @@
               {% else %}
                 <a href="{% url "posts:post_delete" post.id %}" class="card-link">
               {% endif %}
-              <svg width="1.2em" height="1.2em" viewBox="0 1 8 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-              </svg>
-              Delete
+                <svg width="1.2em" height="1.2em" viewBox="0 1 8 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                Delete
               </a>
             </span>
           {% endif %}
         </div>
+
       </div>
     </div>
   </div>

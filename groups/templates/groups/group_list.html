@@ -14,8 +14,6 @@
 {% block base_right %}
   <h1>All Groups</h1>
   {% for group in group_list %}
-
   {% include "_group.html" with group=group %}
-
   {% endfor %}
 {% endblock base_right %}

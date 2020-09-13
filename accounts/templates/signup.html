@@ -1,12 +1,11 @@
 {% extends "accounts_base.html" %}
 {% load bootstrap4 %}
+
 {% block accounts_body %}
 <h1> This is sign-up page</h1>
-
 <form class="" method="post">
   {% csrf_token %}
   {% bootstrap_form form %}
   <input type="Submit" class="btn-font" style="color:#d90429; border-color:#d90429; border-radius: 4px" name="" value="Signup">
 </form>
-
 {% endblock accounts_body %}

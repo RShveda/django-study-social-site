@@ -3,6 +3,19 @@ body{
   font-family: 'Cairo', sans-serif;
 }
 
+h1, h2{
+  color: #d90429;
+  font-family: 'Bangers', cursive;
+}
+
+h5, p{
+  font-family: none;
+}
+
+.font-weight-lighter{
+  font-size: 0.9em;
+}
+
 .nav-custom,
 .nav-custom .navbar-brand{
   background-color: #EDF2F4;
@@ -10,7 +23,6 @@ body{
   font-weight: bold;
   color: #2B2D42;
   font-family: 'Cairo', sans-serif;
-  /* font-weight: 600; */
 }
 
 .nav-custom .navbar-nav > .nav-item > a {
@@ -22,27 +34,9 @@ body{
 	background-color:transparent;
 }
 
-
-h1, h2{
-  color: #d90429;
-  font-family: 'Bangers', cursive;
-}
-
-h5, p{
-  font-family: none;
-}
-
-.btn-font{
-  font-family: 'Bangers', cursive;
-}
-
-.font-weight-lighter{
-  font-size: 0.9em;
-}
-
+/* AREAS */
 .areas{
   border-radius: 16px;
-  /* border: 0px solid white; */
   background-color: #EDF2F4;
   padding: 10px;
   margin-top: 20px;
@@ -50,9 +44,13 @@ h5, p{
 
 .areas:empty{
   display: none;
-  background-color: red;
 }
 
+.btn-font{
+  font-family: 'Bangers', cursive;
+}
+
+/* GROUPS */
 .group-item{
   background-color: inherit;
   margin-top: 10px;
@@ -60,6 +58,13 @@ h5, p{
   border-color: #8d99ae;
 }
 
+.group-card-title{
+  font-weight: bold;
+  color: #ef233c;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* POSTS */
 .post-item{
   padding-bottom: 5px;
 }
@@ -80,22 +85,9 @@ h5, p{
 
 .voting-section{
   text-align: center;
+  padding-bottom: 5px;
 }
 
-.group-card-title{
-  font-weight: bold;
-  color: #ef233c;
-  font-family: 'Cairo', sans-serif;
 
-}
-/* #top-area{
-  background-color: #EDF2F4;
-}
 
-#bottom-area{
-  background-color: #EDF2F4;
-}
-
-#right-area{
-  background-color: #EDF2F4;
-} */
+/* color pallet used: https://coolors.co/2b2d42-8d99ae-edf2f4-ef233c-d90429 */

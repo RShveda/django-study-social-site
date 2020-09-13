@@ -1,7 +1,6 @@
 {% extends "common_base.html" %}
 
 {% block base_top %}
-  {{request.GET.next}}
   <p>Delete post page</p>
   <form method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
@@ -10,7 +9,6 @@
       {% endif %}
     <input type="submit" value="Confirm">
   </form>
-
 {% endblock base_top %}
 
 {% block base_bottom %}{% endblock base_bottom %}

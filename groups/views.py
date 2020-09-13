@@ -50,6 +50,10 @@ class GroupDetailView(DetailView):
     model = Group
 
 class MyGroupListView(ListView):
+    """
+    This class is used as parent for HomePage View.
+    TODO: move this class to main + remove my_group_list template and url.
+    """
     template_name = "my_group_list.html"
     def get_queryset(self):
         if self.request.user.is_authenticated:
