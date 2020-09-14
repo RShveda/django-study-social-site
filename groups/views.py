@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.views import View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Group, GroupMembership
-from django.urls import reverse_lazy
-from django.http import HttpResponse
 from django.contrib import messages
+from .models import Group, GroupMembership
 # Create your views here.
 
 class GroupListView(ListView):
@@ -18,7 +18,7 @@ class GroupCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        form.save()
+        form.save() #we need to save a group before assigning memebers via M2M
         form.instance.members.add(self.request.user)
         return super().form_valid(form)
 
@@ -27,6 +27,9 @@ class GroupUpdateView(LoginRequiredMixin, UpdateView):
     fields = ["name", "description"]
 
     def post(self, request, *args, **kwargs):
+        """
+        Incapsulate ownership verification. Only group owner can edit the group.
+        """
         self.object = self.get_object()
         if self.request.user == self.object.owner:
             return super().post(request, *args, **kwargs)
@@ -39,6 +42,9 @@ class GroupDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('groups:group_list')
 
     def post(self, request, *args, **kwargs):
+        """
+        Incapsulate ownership verification. Only group owner can delete the group.
+        """
         self.object = self.get_object()
         if self.request.user == self.object.owner:
             return super().post(request, *args, **kwargs)

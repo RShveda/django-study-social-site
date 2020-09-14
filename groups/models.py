@@ -25,9 +25,8 @@ class Group(models.Model):
 
 class GroupMembership(models.Model):
     """
-    Imntermediate model that connects User and Group
+    Intermediary model that connects User and Group
     """
-
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     person = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

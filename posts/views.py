@@ -39,6 +39,9 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
 
     def post(self, request, *args, **kwargs):
+        """
+        Only authors can delete their posts.
+        """
         self.object = self.get_object()
         if self.request.user == self.object.author:
             return super().post(request, *args, **kwargs)

@@ -7,6 +7,9 @@ class UserProfileInfo(models.Model):
     karma = models.IntegerField(default=0)
 
     def update_karma(self, x):
+        """
+        Function that updates author karma x must be 1 or -1
+        """
         self.karma += x
         return self.karma
 
