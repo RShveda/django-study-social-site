@@ -23,10 +23,13 @@ POSTS_DIR = os.path.join(BASE_DIR, "posts/templates/posts")
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g_)l_mrhv%%siy&(xtbws_r6-hwz13bpu_c-09v!wbp1l+l%g('
+# SECRET_KEY = 'g_)l_mrhv%%siy&(xtbws_r6-hwz13bpu_c-09v!wbp1l+l%g('
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'g_)l_mrhv%%siy&(xtbws_r6-hwz13bpu_c-09v!wbp1l+l%g(')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = ["192.168.0.111", "localhost", "0.0.0.0"]
 
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,8 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR,]
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "accounts:login"
 LOGOUT_REDIRECT_URL = "/"
+
+# Heroku: Update database configuration from $DATABASE_URL.
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
