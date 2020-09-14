@@ -21,16 +21,17 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         Only members of group can create posts.
         """
         person = self.request.user
-        group = self.kwargs["group"]
+        group = Group.objects.get(slug=self.kwargs["group"])
         try:
             membership = GroupMembership.objects.filter(group = group).filter(person=person)
             if membership.exists():
                 return super().post(request, *args, **kwargs)
             else:
-                messages.warning(request, 'Somethin went wrong')
+                messages.warning(request, '''Could not save post because you
+                do not belong to the group. Please join group first''')
                 return redirect(self.get_success_url())
         except:
-            messages.warning(request, 'Could not save post because author does not belong to the group')
+            messages.warning(request, 'Somethin went wrong')
             return redirect(self.get_success_url())
 
     def get_success_url(self):

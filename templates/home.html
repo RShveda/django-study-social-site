@@ -12,8 +12,23 @@
     <h1 class="display-4">Welcome!</h1>
     <p class="lead">This is the best flood forum on the web.</p>
     <hr class="my-4">
-    <p>Signup and start chatting.</p>
-    <a class="btn btn-primary btn" href="{% url "accounts:signup" %}" role="button">Signup</a>
+    <p>You may use one of default user credentials:</p>
+    <ol>
+      <li>
+        <ul>
+          <li>Name: Jeffrey</li>
+          <li>Pass: somepass</li>
+        </ul>
+      </li>
+      <li>
+        <ul>
+          <li>Name: Dora</li>
+          <li>Pass: somepass</li>
+        </ul>
+      </li>
+    </ol>
+    <p>Or you may register a new User and start chatting.</p>
+    <a class="btn btn-primary btn" href="{% url "accounts:signup" %}" role="button">Register</a>
   {% endif %}
 </div>
 {% endblock base_top %}
