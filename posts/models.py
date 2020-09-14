@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+from django.contrib import messages
 from groups.models import Group, GroupMembership
 
 
@@ -91,7 +92,6 @@ class PostVotes(models.Model):
         When PostVote is deleted Post(up_votes/down_votes) and UserProfileInfo(karma)
         tables are updated.
         """
-        print(self.vote)
         self.post.remove_vote(self.vote)
         self.post.save()
         self.post.author.userprofileinfo.update_karma(0-(self.vote))

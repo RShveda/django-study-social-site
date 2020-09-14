@@ -3,7 +3,7 @@ from django.views.generic.edit import (CreateView, UpdateView, DeleteView)
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, PostVotes
-from groups.models import Group
+from groups.models import Group, GroupMembership
 from accounts.models import UserProfileInfo
 from django.urls import reverse_lazy, reverse, resolve
 from django.conf import settings
@@ -15,6 +15,23 @@ from django.views import View
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["text"]
+
+    def post(self, request, *args, **kwargs):
+        """
+        Only members of group can create posts.
+        """
+        person = self.request.user
+        group = self.kwargs["group"]
+        try:
+            membership = GroupMembership.objects.filter(group = group).filter(person=person)
+            if membership.exists():
+                return super().post(request, *args, **kwargs)
+            else:
+                messages.warning(request, 'Somethin went wrong')
+                return redirect(self.get_success_url())
+        except:
+            messages.warning(request, 'Could not save post because author does not belong to the group')
+            return redirect(self.get_success_url())
 
     def get_success_url(self):
         group_slug = self.kwargs["group"]
