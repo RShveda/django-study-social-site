@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from groups.models import Group, GroupMembership
 
 
@@ -86,14 +88,28 @@ class PostVotes(models.Model):
 
     def delete(self, *args, **kwargs):
         """
-        When PostVote is deleted Post(up_votes/down_votes) and UserProfileInfo(karma) 
+        When PostVote is deleted Post(up_votes/down_votes) and UserProfileInfo(karma)
         tables are updated.
         """
+        print(self.vote)
         self.post.remove_vote(self.vote)
         self.post.save()
         self.post.author.userprofileinfo.update_karma(0-(self.vote))
         self.post.author.userprofileinfo.save()
         super().delete(*args, **kwargs)
+
+    @receiver(pre_delete)
+    def delete_on_cascade(sender, *args, **kwargs):
+        """
+        If PostVote is delete due to Group/Post deletion this method will update
+        karma for post author.
+        """
+        if sender == Post:
+            post = kwargs["instance"]
+            for post_vote in post.postvotes_set.all():
+                vote = post_vote.vote
+                post_vote.post.author.userprofileinfo.update_karma(0-(vote))
+                post_vote.post.author.userprofileinfo.save()
 
     def __str__(self):
         return self.voter.username + " has voted " + str(self.vote) + " for " + self.post.text
