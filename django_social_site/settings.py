@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'g_)l_mrhv%%siy&(xtbws_r6-hwz13
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ["192.168.0.111", "localhost", "0.0.0.0"]
+ALLOWED_HOSTS = ["192.168.0.111", "localhost", "intense-sierra-06756.herokuapp.com"]
 
 
 # Application definition
