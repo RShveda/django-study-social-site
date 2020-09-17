@@ -79,6 +79,13 @@ h5, p{
   border:none;
 }
 
+.post-text{
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 1px;
+    border-bottom: solid 1px #ced4da;
+}
+
 .post-form-toolbar{
   border-top: 1px solid #ced4da;
 }

@@ -41,15 +41,19 @@
 
       <!-- CARD BODY -->
       <div class="card-body col-md-11 order-1 order-md-12">
-        <h5 class="card-title">
-        {% autoescape off %}
+        <div class = "post-text">
+          <p>
+          {% autoescape off %}
           {% if post.text_html %}
           {{post.text_html}}
           {% else %}
           {{post}}
           {% endif %}
-        {% endautoescape %}
-        </h5>
+          {% endautoescape %}
+          </p>
+        </div>
+
+<!--      </div>-->
 
 
         <!-- LEFT TOOLBAR -->
