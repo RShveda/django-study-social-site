@@ -4,14 +4,16 @@ from django.utils import timezone
 from django.urls import reverse
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
-from django.contrib import messages
 from groups.models import Group, GroupMembership
+from posts.mentions_helper import MentionsHandler as mentions
+import markdown
 
 
 class Post(models.Model):
     group = models.ForeignKey(Group, related_name = "group_posts", on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "my_posts", on_delete=models.CASCADE)
     text = models.TextField()
+    text_html = models.TextField(default="")
     created_at = models.DateTimeField(default=timezone.now)
     voters = models.ManyToManyField(settings.AUTH_USER_MODEL, through = "PostVotes")
     up_votes = models.IntegerField(default=0)
@@ -21,6 +23,8 @@ class Post(models.Model):
         """
         Only members can create post in a group.
         """
+        text_with_mentions = mentions.check_for_mentions(self.text)
+        self.text_html = markdown.markdown(text_with_mentions)
         try:
             membership = GroupMembership.objects.filter(group = self.group).filter(person=self.author)
             if membership.exists():
@@ -28,17 +32,17 @@ class Post(models.Model):
             else:
                 print("could not save post because author does not belong to the group")
         except:
-            print("some error occured while qurying GroupMembership table")
+            print("some error occurred while querying GroupMembership table")
 
     def add_vote(self, vote):
         """
         Add vote to UpVotes if its value is 1 or to DownVotes if it is -1.
         """
         if vote == 1:
-            self.up_votes +=1
+            self.up_votes += 1
             return self.up_votes
         elif vote == -1:
-            self.down_votes +=1
+            self.down_votes += 1
             return self.down_votes
         else:
             print("wrong value")
@@ -49,24 +53,24 @@ class Post(models.Model):
         Remove vote from UpVotes if its value is 1 or from DownVotes if it is -1.
         """
         if vote == 1:
-            self.up_votes -=1
+            self.up_votes -= 1
             return self.up_votes
         elif vote == -1:
-            self.down_votes -=1
+            self.down_votes -= 1
             return self.down_votes
         else:
             print("wrong value")
             raise ValueError("wrong value")
 
-
     def __str__(self):
         return self.text
 
     def get_absolute_url(self):
-        return reverse('posts:post_detail', kwargs={'pk':self.pk})
+        return reverse('posts:post_detail', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-created_at']
+
 
 class PostVotes(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

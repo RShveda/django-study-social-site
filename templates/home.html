@@ -27,8 +27,10 @@
         </ul>
       </li>
     </ol>
+    <a class="btn btn-primary" href="{% url "accounts:login" %}" role="button">Login</a>
+    <hr>
     <p>Or you may register a new User and start chatting.</p>
-    <a class="btn btn-primary btn" href="{% url "accounts:signup" %}" role="button">Register</a>
+    <a class="btn btn-secondary" href="{% url "accounts:signup" %}" role="button">Register</a>
   {% endif %}
 </div>
 {% endblock base_top %}

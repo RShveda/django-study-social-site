@@ -5,6 +5,8 @@ from django.urls import reverse
 from groups.models import Group, GroupMembership
 from posts.models import Post, PostVotes
 from accounts.models import UserProfileInfo
+
+
 # Create your tests here.
 
 class SignupViewTests(TestCase):
