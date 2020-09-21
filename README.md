@@ -7,7 +7,7 @@ The website allows following:
 1. Login/Register new user
 2. Create/Edit/Delete discussion groups
 3. Create/Edit/Delete posts in a group
-4. Teg active users in a post with @username teg
+4. Tag active users in a post with a @username tag
 5. Vote/Unvote for a post
 6. Track post authors karma based on votes
 7. See a scoreboard of the best authors
